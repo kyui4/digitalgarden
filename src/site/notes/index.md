@@ -77,15 +77,13 @@ dg-publish: true
     <a data-href="diary/2025-03-17-xra3hfo8vr37.md" href="diary/2025-03-17-xra3hfo8vr37.md" class="internal-link sizu-card-link">
         <div class="sizu-thumbnail">
             <div class="sizu-document">
-                <div class="sizu-preview-text">---
-date: 2025-3-1
-dg-publish: true
----
- 2025年03月17日 - 無産
+                <div class="sizu-preview-text">2025年03月17日 - 無産
 
 特に何もしてません。
 
-なんだか心身ともに疲れてて、できないという</div>
+なんだか心身ともに疲れてて、できないというか。
+
+明日は頑張りたいと思いはするけどね。</div>
             </div>
         </div>
         <div class="sizu-info">
