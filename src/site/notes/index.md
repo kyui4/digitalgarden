@@ -2,171 +2,125 @@
 {"dg-publish":true,"permalink":"/index/","title":"yusquid","dg-note-properties":{"title":"yusquid"}}
 ---
 
-<div class="sizu-grid">
-    <a data-href="diary/2025-03-13-xwm2izt7uemr.md" href="diary/2025-03-13-xwm2izt7uemr.md" class="internal-link sizu-card-link">
+```dataviewjs
+// 【追加】公開サイト用に対策：CSSをここに直接埋め込む
+let inlineStyle = `
+<style>
+/* sizu-cards.css */
+.sizu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 縦に3列 */
+    gap: 24px;
+    margin-top: 1rem;
+}
+
+/* リンクの下線を消し、カード全体のスタイルを設定 */
+a.sizu-card-link {
+    text-decoration: none !important;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: inherit;
+    transition: opacity 0.2s ease;
+}
+
+a.sizu-card-link:hover {
+    opacity: 0.8;
+}
+
+/* 外側の横長背景 (#eff7ff) */
+.sizu-thumbnail {
+    background-color: #eff7ff;
+    border-radius: 16px;
+    aspect-ratio: 1.5; /* 横長の比率 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+/* 内側の縦長ドキュメント (#ffffff) */
+.sizu-document {
+    background-color: #ffffff;
+    width: 42%;       /* A4比率に近づける調整 */
+    height: 90%;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); /* 微細なリッチな影 */
+    padding: 6px 8px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* ドキュメント内の最初の数行 (#000000) */
+.sizu-preview-text {
+    color: #000000;
+    font-size: 5px; /* 実際のドキュメント感を出すための極小文字 */
+    line-height: 1.6;
+    word-wrap: break-word;
+    opacity: 0.8;
+}
+
+/* 情報エリア（タイトルと日付） */
+.sizu-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 4px;
+}
+
+.sizu-title {
+    font-size: 1.05em;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--text-normal);
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 2行で三点リーダー */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sizu-date {
+    font-size: 0.85em;
+    color: #999999; /* 灰色の小さな日付 */
+}
+
+/* スマホ等へのレスポンシブ対応 */
+@media (max-width: 768px) {
+    .sizu-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+    .sizu-grid { grid-template-columns: 1fr; }
+}
+</style>
+`;
+
+const targetQuery = '"diary"'; 
+const pages = dv.pages(targetQuery).sort(p => p.file.ctime, 'desc').limit(9);
+
+// HTMLの最初にスタイルを結合する
+let html = inlineStyle + '<div class="sizu-grid">';
+
+for (let page of pages) {
+    let content = await dv.io.load(page.file.path);
+    let preview = content.replace(/^---[\s\S]*?---\n/, '').replace(/[#*`_\[\]>]/g, '').trim().substring(0, 100);
+    let title = page.file.name;
+    let date = page.file.ctime ? page.file.ctime.toFormat('yyyy/M/d') : "";
+
+    html += `
+    <a data-href="${page.file.path}" href="${page.file.path}" class="internal-link sizu-card-link">
         <div class="sizu-thumbnail">
             <div class="sizu-document">
-                <div class="sizu-preview-text">---
-date: 2025-3-1
-dg-publish: true
----
- 2025年03月13日 - 日記を始める。生活の効率化について。
-
-しずかなインターネット、実は前から気に</div>
+                <div class="sizu-preview-text">${preview}</div>
             </div>
         </div>
         <div class="sizu-info">
-            <div class="sizu-title">2025-03-13-xwm2izt7uemr</div>
-            <div class="sizu-date">2026/6/1</div>
+            <div class="sizu-title">${title}</div>
+            <div class="sizu-date">${date}</div>
         </div>
-    </a>
-    <a data-href="diary/2025-03-14-wiuxxi2b83ob.md" href="diary/2025-03-14-wiuxxi2b83ob.md" class="internal-link sizu-card-link">
-        <div class="sizu-thumbnail">
-            <div class="sizu-document">
-                <div class="sizu-preview-text">---
-date: 2025-3-1
-dg-publish: true
----
- 2025年03月14日 - 凡人たちが綺麗に見えた。
+    </a>`;
+}
+html += '</div>';
 
-二日目にして、あやうく日記を書き忘れるところだった</div>
-            </div>
-        </div>
-        <div class="sizu-info">
-            <div class="sizu-title">2025-03-14-wiuxxi2b83ob</div>
-            <div class="sizu-date">2026/6/1</div>
-        </div>
-    </a>
-    <a data-href="diary/2025-03-15-zb7wuakwoike.md" href="diary/2025-03-15-zb7wuakwoike.md" class="internal-link sizu-card-link">
-        <div class="sizu-thumbnail">
-            <div class="sizu-document">
-                <div class="sizu-preview-text">---
-date: 2025-3-1
-dg-publish: true
----
- 2025年03月15日 - 散歩に時間を費やしすぎる
-
-9時半起床。
-
-具体的な時間は記録し忘れた。
-</div>
-            </div>
-        </div>
-        <div class="sizu-info">
-            <div class="sizu-title">2025-03-15-zb7wuakwoike</div>
-            <div class="sizu-date">2026/6/1</div>
-        </div>
-    </a>
-    <a data-href="diary/2025-03-16-56d8tdx6hmar.md" href="diary/2025-03-16-56d8tdx6hmar.md" class="internal-link sizu-card-link">
-        <div class="sizu-thumbnail">
-            <div class="sizu-document">
-                <div class="sizu-preview-text">---
-date: 2025-3-1
-dg-publish: true
----
- 2025年03月16日 - たのしかったのに
-
-今日は昼からカラオケに行って、そのあとにいろいろ歩いて、1</div>
-            </div>
-        </div>
-        <div class="sizu-info">
-            <div class="sizu-title">2025-03-16-56d8tdx6hmar</div>
-            <div class="sizu-date">2026/6/1</div>
-        </div>
-    </a>
-    <a data-href="diary/2025-03-17-xra3hfo8vr37.md" href="diary/2025-03-17-xra3hfo8vr37.md" class="internal-link sizu-card-link">
-        <div class="sizu-thumbnail">
-            <div class="sizu-document">
-                <div class="sizu-preview-text">2025年03月17日 - 無産
-
-特に何もしてません。
-
-なんだか心身ともに疲れてて、できないというか。
-
-明日は頑張りたいと思いはするけどね。</div>
-            </div>
-        </div>
-        <div class="sizu-info">
-            <div class="sizu-title">2025-03-17-xra3hfo8vr37</div>
-            <div class="sizu-date">2026/6/1</div>
-        </div>
-    </a>
-    <a data-href="diary/2025-03-18-mv3h49i89u5k.md" href="diary/2025-03-18-mv3h49i89u5k.md" class="internal-link sizu-card-link">
-        <div class="sizu-thumbnail">
-            <div class="sizu-document">
-                <div class="sizu-preview-text">---
-date: 2025-3-1
-dg-publish: true
----
- 2025年03月18日 - 推測
-
-6:50起床。
-
-眠気覚ましにあつ森をする。
-
-ゲームというの</div>
-            </div>
-        </div>
-        <div class="sizu-info">
-            <div class="sizu-title">2025-03-18-mv3h49i89u5k</div>
-            <div class="sizu-date">2026/6/1</div>
-        </div>
-    </a>
-    <a data-href="diary/2025-03-19-ah72dihw6ht7.md" href="diary/2025-03-19-ah72dihw6ht7.md" class="internal-link sizu-card-link">
-        <div class="sizu-thumbnail">
-            <div class="sizu-document">
-                <div class="sizu-preview-text">---
-date: 2025-3-1
-dg-publish: true
----
- 2025年03月19日 - タスク消化
-
-今日はタスク消化を沢山した、いい日。
-
-先日注文したものがあ</div>
-            </div>
-        </div>
-        <div class="sizu-info">
-            <div class="sizu-title">2025-03-19-ah72dihw6ht7</div>
-            <div class="sizu-date">2026/6/1</div>
-        </div>
-    </a>
-    <a data-href="diary/2025-03-21-t2t2264rhkvo.md" href="diary/2025-03-21-t2t2264rhkvo.md" class="internal-link sizu-card-link">
-        <div class="sizu-thumbnail">
-            <div class="sizu-document">
-                <div class="sizu-preview-text">---
-date: 2025-3-1
-dg-publish: true
----
- 2025年03月21日 - ハンゲキ
-
-8:22起床。
-
-今日はフェスに行く日。
-
-この日記は追記</div>
-            </div>
-        </div>
-        <div class="sizu-info">
-            <div class="sizu-title">2025-03-21-t2t2264rhkvo</div>
-            <div class="sizu-date">2026/6/1</div>
-        </div>
-    </a>
-    <a data-href="diary/2025-03-20-m1en4k69cb3x.md" href="diary/2025-03-20-m1en4k69cb3x.md" class="internal-link sizu-card-link">
-        <div class="sizu-thumbnail">
-            <div class="sizu-document">
-                <div class="sizu-preview-text">---
-date: 2025-3-1
-dg-publish: true
----
- 2025年03月20日 - 買い物って嬉しい
-
-2時に起きたり5時に起きたりして、最終的に8時に起床。
-</div>
-            </div>
-        </div>
-        <div class="sizu-info">
-            <div class="sizu-title">2025-03-20-m1en4k69cb3x</div>
-            <div class="sizu-date">2026/6/1</div>
-        </div>
-    </a></div>
+dv.container.innerHTML = html;
